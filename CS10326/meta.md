@@ -36,7 +36,7 @@ By completing this book, I should be able to:
 
 ### Part I — Proofs
 
-- [ ] Chapter 1 — Propositions
+- [x] Chapter 1 — Propositions
 - [ ] Chapter 2 — Patterns of Proof
 - [ ] Chapter 3 — Induction
 - [ ] Chapter 4 — Number Theory

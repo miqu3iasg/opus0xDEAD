@@ -32,6 +32,44 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 
+# LaTeX (latexmk / vimtex compilation artifacts)
+build/
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.nav
+*.snm
+*.vrb
+*.figlist
+*.makefile
+*.fdb_latexmk
+
+# Bibliography / glossary 
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.acn
+*.acr
+*.alg
+
+# Subject index
+*.idx
+*.ind
+*.ilg
+
 # Build directories
 build/
 dist/
