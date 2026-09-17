@@ -12,11 +12,18 @@ The book covers mathematical proofs, induction, number theory, graph theory, rel
 
 The material is based on MIT's undergraduate course _Mathematics for Computer Science (6.042J)_.
 
+| Column 1 | Column 2 |
+| -------- | -------- |
+| teste    | teste    |
+| Aqui     | aqui     |
+
+---
+
 ## Learning Objectives
 
 By completing this book, I should be able to:
 
-- Read and construct rigorous mathematical proofs.
+- Read and construct rigorous mathematical proofs
 - Work with propositional and predicate logic.
 - Apply direct proof, contradiction, cases, and induction.
 - Reason about integers, divisibility, modular arithmetic, and number theory.

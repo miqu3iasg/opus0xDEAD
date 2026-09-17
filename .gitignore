@@ -37,6 +37,7 @@ build/
 *.aux
 *.log
 *.out
+*.tex
 *.toc
 *.lof
 *.lot
