@@ -8,6 +8,12 @@
 
 <Brief description of the book, its scope, and what it covers.>
 
+## Bibliographic Reference
+
+<!-- Bibliographic reference formatted according to ABNT2 standards. -->
+
+<ABNT2 bibliographic reference of the book.>
+
 ## Learning Objectives
 
 By completing this book, I should be able to:

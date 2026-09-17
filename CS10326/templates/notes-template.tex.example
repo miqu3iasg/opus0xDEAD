@@ -1,0 +1,126 @@
+\documentclass[12pt,a4paper]{article}
+
+% Encoding and language
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{lmodern}
+
+% Page layout
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{setspace}
+\onehalfspacing
+
+% Document variables
+% Fill these in for each new book.
+\newcommand{\bookTitle}{Mathematics for Computer Science}
+\newcommand{\bookShortTitle}{MCS} % used in the page header
+\newcommand{\bookAuthor}{Eric Lehman, F. Thomson Leighton, Albert R. Meyer}
+\newcommand{\studentName}{Miquéias Alves Medeiros}
+\newcommand{\documentSubject}{Study notes on \bookTitle}
+\newcommand{\documentKeywords}{Mathematics, Computer Science, Discrete Mathematics, Logic, Probability, Graph Theory}
+
+% Full bibliographic reference
+\newcommand{\fullReference}{%
+	LEHMAN, Eric; LEIGHTON, F. Thomson; MEYER, Albert R. \textit{\bookTitle}. Cambridge: Massachusetts Institute of Technology, 2015.%
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\bookShortTitle\ --- Personal notes} % fixed label: translate to match notes' language
+\fancyhead[R]{\studentName}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Code listings (remove this block if the book does not involve code)
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Replace "Scheme" with the language relevant to this book, or remove
+% this custom definition and use \lstset{language=...} directly with a
+% language already supported by listings (Python, C, Java, etc.)
+\lstdefinelanguage{Scheme}{
+	morekeywords={},
+	sensitive=true,
+	morecomment=[l]{;},
+}
+
+\lstset{
+	language=Scheme,
+	basicstyle=\ttfamily\small,
+	commentstyle=\color{gray},
+	breaklines=true,
+	showstringspaces=false,
+	frame=none,
+	columns=fullflexible,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=8pt,
+	captionpos=b,
+}
+
+% Hyperlinks and PDF metadata
+\usepackage{hyperref}
+\hypersetup{
+	pdftitle={\bookTitle\ - Personal notes},
+	pdfauthor={\studentName},
+	pdfsubject={\documentSubject},
+	pdfkeywords={\documentKeywords},
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=blue,
+	urlcolor=blue,
+}
+
+% Title page
+\title{\bookTitle \\ \large Personal study notes} % fixed label: translate to match notes' language
+\author{\studentName}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+	\small Notes based on the work by \bookAuthor. % fixed label: translate to match notes' language
+\end{center}
+
+\vfill
+
+\tableofcontents
+
+\newpage
+
+% Content
+% Duplicate the block below for each chapter.
+\section{Notes on ch. <NUMBER> <CHAPTER TITLE>, pp. <XX-XX>} % fixed label: translate to match notes' language
+
+Introductory or explanatory text goes here.
+
+% Remove this block if not applicable to the book
+\begin{lstlisting}[caption={<Example description>}]
+<example code here>
+\end{lstlisting}
+
+More explanatory text.
+
+% Copy the \section above (and \newpage before it, if chapters should
+% start on separate pages) to add more chapters.
+
+\newpage
+\section*{References} % fixed label: translate to match notes' language
+\addcontentsline{toc}{section}{References} % fixed label: translate to match notes' language
+
+\begin{thebibliography}{9}
+
+	\bibitem{reference1}
+	\fullReference
+
+\end{thebibliography}
+
+\end{document}

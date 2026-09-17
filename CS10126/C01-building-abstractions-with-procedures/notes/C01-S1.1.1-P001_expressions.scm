@@ -3,7 +3,7 @@
 ; Created:       2026-09-16
 ; Modified:      2026-09-16
 ;
-; Exploring Lisp (Scheme) expressions in practice
+; Exploring Lisp (Scheme) expressions in practice.
 ;
 ; SPDX-License-Identifier: MIT
 ; Copyright:     © 2026 Miquéias Alves Medeiros <https://github.com/miqu3iasg>. All rights reserved.

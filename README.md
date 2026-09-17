@@ -26,23 +26,49 @@ The complete structure of the education is maintained in the `curriculum/` direc
 ├── curriculum/
 │   └── meta.md
 │
+├── templates/
+│   ├── meta-template.md
+│   └── notes-template.tex.example
+│
 ├── <COURSE_CODE>/
 │   ├── meta.md
-│   ├── notes/
-│   ├── exercises/
-│   ├── projects/
+│   ├── resources/
+│   ├── templates/
+│   │   └── notes-template.tex.example
+│   ├── exports/
+│   ├── C01-<chapter-title>/
+│   │   ├── notes/
+│   │   └── exercises/
+│   ├── C02-<chapter-title>/
+│   │   ├── notes/
+│   │   └── exercises/
 │   └── ...
 │
 ├── <COURSE_CODE>/
 │   ├── meta.md
-│   ├── notes/
-│   ├── exercises/
+│   ├── resources/
+│   ├── templates/
+│   ├── exports/
+│   ├── C01-<chapter-title>/
+│   │   ├── notes/
+│   │   └── exercises/
 │   └── ...
 │
 └── README.md
 ```
 
-The exact internal structure of each course directory may vary according to the nature of the material.
+Material within each course is organized by chapter, with separate subdirectories for notes and exercises. Code is kept alongside notes rather than in a separate directory, since code files are also annotated with explanatory comments and serve as notes in their own right. The exact internal structure of each course directory may vary according to the nature of the material — see [Naming Convention](#naming-convention) below for the full file and directory naming rules.
+
+## Templates
+
+The root `templates/` directory holds the base templates used across the entire repository:
+
+- A template for each course's `meta.md`, defining the standard fields every course index should have (book and author information, subject and scope, objectives, progress, links).
+- A template for LaTeX notes, used as the starting point for the long-form, typeset version of study notes.
+
+Each course also has its own `templates/` directory. It carries the same templates as the root, but pre-filled with information specific to that course — title, bibliography, author, and other metadata that would otherwise have to be re-entered by hand every time a new note or the course's `meta.md` is created. This keeps the root templates generic and reusable, while the per-course copies remove repetitive setup work.
+
+Notes are intentionally kept in two forms: the working Markdown/code notes described below, and a typeset LaTeX/PDF version. This redundancy is deliberate — long-term permanence of the notes matters, and having both a lightweight working format and a polished, typeset archival format is a goal in itself, independent of strict necessity.
 
 ## Course Organization
 
@@ -58,6 +84,67 @@ The `meta.md` file inside each course directory serves as the course index and c
 - Useful external resources
 
 Study artifacts are kept separately from `meta.md` so that the metadata remains concise and easy to inspect.
+
+Each course directory also contains an `exports/` folder, where the PDFs generated from the course's LaTeX notes are kept. The LaTeX source itself is not versioned — only the resulting PDF is committed, via `exports/`. This keeps the repository focused on the finished, permanent artifact rather than the intermediate source used to produce it.
+
+## Naming Convention
+
+Within each course directory, material is organized by chapter, with separate subdirectories for notes and exercises.
+
+```text
+<COURSE_CODE>/
+├── meta.md
+├── resources/
+├── templates/
+├── exports/
+├── C01-<chapter-title>/
+│   ├── notes/
+│   └── exercises/
+├── C02-<chapter-title>/
+│   ├── notes/
+│   └── exercises/
+└── ...
+```
+
+There is no separate `code/` directory. Code files also serve as notes — they are written with explanatory comments — so they live in `notes/` alongside conceptual notes, distinguished by their content type (`PXXX`, see below).
+
+Since the course code is already given by the directory itself, it does not need to be repeated in filenames.
+
+### File Naming
+
+Files follow the general format:
+
+```
+CXX-SX.X.X-TXXX-description.ext
+```
+
+Where:
+
+- `CXX`: Chapter identifier.
+- `SX.X.X`: Section identifier, based on the source book.
+- `TXXX`: Content type and sequential number.
+- `description`: Short, descriptive name.
+- `ext`: File extension.
+
+### Content Types
+
+- `NXXX`: Note.
+- `PXXX`: Program or code example, annotated with explanatory comments — stored in `notes/` alongside conceptual notes, since it doubles as one.
+- `XXX`: Exercise.
+- `S00`: General chapter material not tied to a specific section.
+
+The numbering of notes, programs, and exercises restarts within each section.
+
+Examples:
+
+```
+notes/C01-S1.1.1-N001-procedures.md
+notes/C01-S1.1.1-P001-square.scm
+exercises/C01-S1.1.2-X001-evaluate-expression.scm
+notes/C01-S00-N001-chapter-summary.md
+```
+
+Any book-specific conventions (e.g. programming language used, exercise style) are documented in that course's own `meta.md`.
 
 ## Progress
 
@@ -117,8 +204,10 @@ This allows personal or unpublished material to coexist with the public portion 
 - Each course directory contains a `meta.md`.
 - `meta.md` contains course metadata and reading progress.
 - Course-specific material stays inside its corresponding course directory.
+- The root `templates/` directory holds the base `meta.md` and LaTeX note templates; each course keeps its own pre-filled copy under its own `templates/`.
+- Generated PDFs from LaTeX notes are kept in each course's `exports/` folder; the LaTeX source itself is not versioned.
 - Directories beginning with `_` are private.
-- Generated files and build artifacts are excluded from version control.
+- Generated files and build artifacts are excluded from version control, with the exception of the PDFs in `exports/`, which are kept intentionally.
 - External resources are recorded in the `Links` section of the corresponding `meta.md`.
 
 ## Status

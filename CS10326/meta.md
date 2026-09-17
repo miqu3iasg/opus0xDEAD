@@ -12,12 +12,9 @@ The book covers mathematical proofs, induction, number theory, graph theory, rel
 
 The material is based on MIT's undergraduate course _Mathematics for Computer Science (6.042J)_.
 
-| Column 1 | Column 2 |
-| -------- | -------- |
-| teste    | teste    |
-| Aqui     | aqui     |
+## Bibliographic Reference
 
----
+LEHMAN, Eric; LEIGHTON, F. Thomson; MEYER, Albert R. Mathematics for computer science. Cambridge: Massachusetts Institute of Technology, 2015. Disponível em: https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/. Acesso em: 17 set. 2026.
 
 ## Learning Objectives
 
