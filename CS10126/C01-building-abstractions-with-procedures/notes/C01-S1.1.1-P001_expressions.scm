@@ -1,4 +1,4 @@
-; File:          C01-S1.1.1-P002_expressions.scm
+; File:          C01-S1.1.1-P001_expressions.scm
 ; Author:        Miquéias Alves Medeiros <https://github.com/miqu3iasg>
 ; Created:       2026-09-16
 ; Modified:      2026-09-16
