@@ -43,7 +43,6 @@
   numbers=left,
   numberstyle=\tiny\color{gray},
   numbersep=8pt,
-  captionpos=b,
 }
 
 % --- Hyperlinks and PDF metadata ---
@@ -75,8 +74,6 @@
 
 \vfill
 
-\tableofcontents
-
 \newpage
 
 \section{Anotações do cap. NÚMERO-DO-CAPÍTULO Título-do-Capítulo, pp. XX-XX}
@@ -85,15 +82,13 @@
 
 Texto de introdução ou explicação vem aqui.
 
-\begin{lstlisting}[caption={Exemplo de expressão em Scheme}]
+\begin{lstlisting}
 (+ 1 2) ; 3
 \end{lstlisting}
 
 Mais texto explicativo.
 
 \newpage
-\section*{Referências}
-\addcontentsline{toc}{section}{Referências}
 
 \begin{thebibliography}{9}
 

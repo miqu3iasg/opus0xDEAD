@@ -92,7 +92,6 @@
 	numbers=left,
 	numberstyle=\tiny\color{gray},
 	numbersep=8pt,
-	captionpos=b,
 }
 
 % Hyperlinks and PDF metadata
@@ -124,8 +123,6 @@
 
 \vfill
 
-\tableofcontents
-
 \newpage
 
 % Content
@@ -135,7 +132,7 @@
 Introductory or explanatory text goes here.
 
 % Remove this block if not applicable to the book
-\begin{lstlisting}[caption={<Example description>}]
+\begin{lstlisting}
 <example code here>
 \end{lstlisting}
 
@@ -146,7 +143,6 @@ More explanatory text.
 
 \newpage
 \section*{References} % fixed label: translate to match notes' language
-\addcontentsline{toc}{section}{References} % fixed label: translate to match notes' language
 
 \begin{thebibliography}{9}
 

@@ -1,10 +1,10 @@
 ; File:          C01-S1.1.2-P002_naming_and_enviroment.scm
 ; Author:        Miquéias Alves Medeiros <https://github.com/miqu3iasg>
-; Reference:     Structure and Interpretation of Computer Programs (SICP)
-; By:            Harold Abelson, Gerald Jay Sussman, Julie Sussman
-; Location:      pp. 10–11
 ; Created:       2026-09-17
 ; Modified:      2026-09-17
+; By:            Harold Abelson, Gerald Jay Sussman, Julie Sussman
+; Reference:     Structure and Interpretation of Computer Programs (SICP)
+; Location:      pp. 10–11
 ;
 ; Introduction to naming computational objects with `define` in Scheme and the role
 ; of the environment in maintaining associations between names and values.
