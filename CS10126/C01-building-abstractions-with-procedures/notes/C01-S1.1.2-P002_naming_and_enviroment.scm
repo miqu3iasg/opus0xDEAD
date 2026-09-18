@@ -9,8 +9,8 @@
 ; Introduction to naming computational objects with `define` in Scheme and the role
 ; of the environment in maintaining associations between names and values.
 ;
-; SPDX-License-Identifier: MIT
-; Copyright:     (c) 2026 Miquéias Alves Medeiros <https://github.com/miqu3iasg>. All rights reserved.
+; SPDX-License-Identifier: AGPL-3.0-only
+; Copyright:     (c) 2026 Miquéias Alves Medeiros <https://github.com/miqu3iasg>. 
 
 
 ; In programming languages, we can assign names do computational objects. These names refer to 
