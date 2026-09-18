@@ -10,7 +10,7 @@
 ; of the environment in maintaining associations between names and values.
 ;
 ; SPDX-License-Identifier: MIT
-; Copyright:     © 2026 Miquéias Alves Medeiros <https://github.com/miqu3iasg>. All rights reserved.
+; Copyright:     (c) 2026 Miquéias Alves Medeiros <https://github.com/miqu3iasg>. All rights reserved.
 
 
 ; In programming languages, we can assign names do computational objects. These names refer to 
