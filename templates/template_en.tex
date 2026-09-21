@@ -10,7 +10,8 @@
 % the model of a classic technical book: plain text, footer with the
 % page number only. The cover follows the model of a simple thesis
 % title page: white paper, centered text, and a single small
-% drawing (a transistor) as the only decoration.
+% drawing as the only decoration. The drawing changes with the area
+% of study (see \coverArea in the document variables).
 %
 % This is the English version. All visible text in the document is
 % in English. The Portuguese version is the file template_pt-br.tex.
@@ -33,8 +34,8 @@
 %
 % 1. Copy this file to start the notes for a new book.
 % 2. Fill in the fields marked with <...> in the "document variables"
-%    section below. It is the only place you need to edit to
-%    configure the whole document.
+%    section below, and pick the cover drawing with \coverArea. It is
+%    the only place you need to edit to configure the whole document.
 % 3. If the book is not about programming, the listings package and
 %    the code block can be removed.
 % 4. Duplicate the section block for each chapter of notes.
@@ -66,7 +67,7 @@
 % "ppl" for Palatino or "ptm" for Times).
 % ============================================================
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,calc}
 \newcommand{\coverserif}{\rmfamily}
 \usepackage{xcolor}
 % Classic scheme: black ink on white paper, gray for secondary text.
@@ -128,6 +129,20 @@
 \newcommand{\bookAuthor}{<BOOK AUTHOR(S)>}
 \newcommand{\studentName}{Miquéias Alves Medeiros}
 \newcommand{\documentKeywords}{<KEYWORD1, KEYWORD2, KEYWORD3>}
+
+% Cover drawing, chosen by area of study. Available values:
+%   TechFund     - transistor                   (computing fundamentals)
+%   TechWeb      - globe and network            (web, internet, protocols)
+%   TechArch     - stack of layers              (software architecture)
+%   TechHW       - CPU and memory               (computer hardware)
+%   MathCalc     - integral sign, partial derivative, infinity (calculus)
+%   MathLinAlg   - matrix with brackets and entries (linear algebra)
+%   MathDiscrete - Venn diagram and logic/set symbols (discrete mathematics)
+%   MathComp     - bits, graph, integral and linear map
+%                  (general mathematics applied to computers)
+%   None         - no drawing
+\newcommand{\coverArea}{TechFund}
+
 % License: CC BY-NC-ND 4.0, the most restrictive of the Creative
 % Commons licenses (SPDX identifier: CC-BY-NC-ND-4.0). Allows only
 % reading and redistributing the unchanged work, with attribution.
@@ -139,50 +154,20 @@
 }
 
 % ============================================================
-% Hyperlinks and PDF metadata: links work, but stay invisible,
-% as in a printed document.
+% Cover drawings. Each drawing is a macro named
+% \coverDrawing<Area>. To add a new area, define a new
+% \coverDrawing<NewArea> and set \coverArea to <NewArea>.
+% All drawings share the same style: thin black strokes, two subtle
+% concentric rings, small filled dots, and roughly the same footprint.
 % ============================================================
-\usepackage[hidelinks]{hyperref}
-\hypersetup{
-	pdftitle={\bookTitle: Study notes},
-	pdfauthor={\studentName},
-	pdfsubject={Study notes on \bookTitle},
-	pdfkeywords={\documentKeywords},
-}
+% ===== COVER DRAWINGS BEGIN =====
 
-\begin{document}
-
-% ============================================================
-% Cover: simple thesis-style title page. White paper, everything
-% centered, normal page margins. Top: type of document and title.
-% Middle: a drawing of an abstract bipolar transistor (base,
-% collector and emitter) in thin lines, surrounded by rings and
-% connected to circuit traces, the only decoration.
-% Bottom: author of the notes and date.
-% ============================================================
-\begin{titlepage}
-	\thispagestyle{empty}
-	\centering
-	\coverserif
-	\vspace*{1.5cm}
-
-	{\small\bfseries\color{coverdim}\MakeUppercase{Study notes}\par}
-	\vspace{0.4cm}
-	{\color{coverfg}\rule{2cm}{0.6pt}\par}
-	\vspace{1.0cm}
-
-	{\bfseries\fontsize{24}{30}\selectfont\color{coverfg} \bookTitle\par}
-	\vspace{0.8cm}
-	{\normalsize\color{coverdim} Based on the work of \bookAuthor\par}
-
-	\vfill
-
-	% transistor drawing: concentric rings, envelope, base/collector/emitter,
-	% parallel traces and square pads at the ends of the traces
+% ---------- Tech / fundamentals: bipolar transistor ----------
+\newcommand{\coverDrawingTechFund}{%
 	\begin{tikzpicture}[scale=0.65, coverfg]
 		% subtle concentric rings
-		\foreach \r/\o in {5.6/0.22,7.0/0.12} {
-				\draw[draw opacity=\o, line width=0.5pt] (0,0) circle (\r);
+		\foreach \ringr/\ringo in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\ringo, line width=0.5pt] (0,0) circle (\ringr);
 			}
 
 		% transistor envelope
@@ -215,7 +200,379 @@
 		\foreach \yy in {6.6,-4.6} {
 				\draw[line width=0.8pt] (6.7,\yy-0.3) rectangle ++(0.6,0.6);
 			}
-	\end{tikzpicture}
+	\end{tikzpicture}%
+}
+
+% ---------- Tech / web: wireframe globe, network links, outer nodes ----------
+\newcommand{\coverDrawingTechWeb}{%
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% subtle concentric rings
+		\foreach \ringr/\ringo in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\ringo, line width=0.5pt] (0,0) circle (\ringr);
+			}
+
+		% globe: outline, meridians and parallels
+		\draw[line width=1.1pt] (0,0) circle (4.2);
+		\foreach \mrx in {1.5,3.0} {
+				\draw[draw opacity=0.4, line width=0.5pt] (0,0) ellipse ({\mrx} and 4.2);
+			}
+		\foreach \ph in {-2.4,0,2.4} {
+				\pgfmathsetmacro{\pw}{sqrt(4.2*4.2-\ph*\ph)}
+				\draw[draw opacity=0.4, line width=0.5pt] (0,\ph) ellipse ({\pw} and {0.28*\pw});
+			}
+
+		% nodes on the globe
+		\coordinate (p1) at (-1.6,2.5);
+		\coordinate (p2) at (2.3,1.4);
+		\coordinate (p3) at (-2.7,-1.3);
+		\coordinate (p4) at (0.9,-2.8);
+		\coordinate (p5) at (-0.2,0.1);
+
+		% links on the globe, with a packet in the middle of each
+		\draw[line width=0.9pt] (p1) to[bend left=22] node[pos=0.5, circle, fill, inner sep=1.3pt] {} (p2);
+		\draw[line width=0.9pt] (p2) to[bend left=22] node[pos=0.5, circle, fill, inner sep=1.3pt] {} (p4);
+		\draw[line width=0.9pt] (p4) to[bend left=22] node[pos=0.5, circle, fill, inner sep=1.3pt] {} (p3);
+		\draw[line width=0.9pt] (p3) to[bend left=22] node[pos=0.5, circle, fill, inner sep=1.3pt] {} (p1);
+		\draw[line width=0.5pt] (p5) -- (p1);
+		\draw[line width=0.5pt] (p5) -- (p2);
+		\draw[line width=0.5pt] (p5) -- (p3);
+		\draw[line width=0.5pt] (p5) -- (p4);
+
+		% outer nodes, on the outer ring
+		\coordinate (o1) at (150:7.0);
+		\coordinate (o2) at (35:7.0);
+		\coordinate (o3) at (-30:7.0);
+		\coordinate (o4) at (-115:7.0);
+		\coordinate (o5) at (90:7.0);
+
+		\draw[line width=0.6pt] (p1) -- (o1);
+		\draw[line width=0.6pt] (p1) -- (o5);
+		\draw[line width=0.6pt] (p2) -- (o2);
+		\draw[line width=0.6pt] (p2) -- (o3);
+		\draw[line width=0.6pt] (p4) -- (o4);
+		\draw[line width=0.6pt] (p3) -- (o1);
+
+		% square pads at the outer nodes
+		\foreach \o in {o1,o2,o3,o4,o5} {
+				\draw[line width=0.8pt, fill=white] ($(\o)+(-0.3,-0.3)$) rectangle ++(0.6,0.6);
+			}
+
+		% globe nodes on top of everything
+		\foreach \p in {p1,p2,p3,p4} {
+				\draw[line width=0.8pt, fill=white] (\p) circle (0.3);
+				\fill (\p) circle (0.12);
+			}
+		\draw[line width=0.8pt, fill=white] (p5) circle (0.45);
+		\fill (p5) circle (0.18);
+	\end{tikzpicture}%
+}
+
+% ---------- Tech / architecture: stack of layers, flow through them ----------
+\newcommand{\coverDrawingTechArch}{%
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% subtle concentric rings
+		\foreach \ringr/\ringo in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\ringo, line width=0.5pt] (0,0) circle (\ringr);
+			}
+
+		% four isometric slabs (layers), drawn from the bottom up
+		\foreach \ly [count=\k] in {-3.9,-1.3,1.3,3.9} {
+				% vertical links to the slab below
+				\ifnum\k>1
+					\pgfmathsetmacro{\lyb}{\ly-2.6}
+					\draw[dashed, line width=0.5pt] (-4.8,\lyb) -- (-4.8,\ly-0.3);
+					\draw[dashed, line width=0.5pt] (4.8,\lyb) -- (4.8,\ly-0.3);
+					\draw[dashed, line width=0.5pt] (0,\lyb-2.4) -- (0,\ly-2.4-0.3);
+				\fi
+				% slab body and top face
+				\filldraw[fill=white, line width=0.9pt]
+				(-4.8,\ly) -- (-4.8,\ly-0.3) -- (0,\ly-2.7) -- (4.8,\ly-0.3) -- (4.8,\ly) -- (0,\ly-2.4) -- cycle;
+				\draw[line width=1.1pt, fill=white] (-4.8,\ly) -- (0,\ly+2.4) -- (4.8,\ly) -- (0,\ly-2.4) -- cycle;
+				\draw[line width=0.9pt] (0,\ly-2.4) -- (0,\ly-2.7);
+				% components on the slab (front strip, the part not covered by the slab above)
+				\foreach \cx in {-2.3,2.3} {
+						\draw[line width=0.6pt] (\cx-0.7,\ly-0.15) -- (\cx,\ly+0.2) -- (\cx+0.7,\ly-0.15) -- (\cx,\ly-0.5) -- cycle;
+					}
+				\filldraw (-0.5,\ly-1.2) -- (0,\ly-0.95) -- (0.5,\ly-1.2) -- (0,\ly-1.45) -- cycle;
+			}
+
+		% flow through all layers
+		\draw[line width=1.1pt, -{Stealth[length=3mm,width=2.4mm]}] (0,-5.1) -- (0,6.9);
+	\end{tikzpicture}%
+}
+
+% ---------- Tech / hardware: CPU package, memory modules, buses ----------
+\newcommand{\coverDrawingTechHW}{%
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% subtle concentric rings
+		\foreach \ringr/\ringo in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\ringo, line width=0.5pt] (0,0) circle (\ringr);
+			}
+
+		% memory modules on both sides, with buses coming from the CPU
+		\foreach \sx in {-1,1} {
+				\begin{scope}[xscale=\sx]
+					\foreach \by in {-1.8,0,1.8} {
+							\draw[line width=0.8pt] (3.3,\by) -- (5.5,\by);
+						}
+					\draw[line width=1.1pt, fill=white] (5.5,-3.4) rectangle (7.1,3.4);
+					\foreach \by in {-1.8,0,1.8} {
+							\draw[line width=0.8pt] (5.8,\by-0.5) rectangle ++(1.0,1.0);
+							\fill (6.3,\by) circle (0.1);
+						}
+				\end{scope}
+			}
+
+		% CPU package with pins on the four sides
+		\draw[line width=1.1pt, fill=white, rounded corners=4pt] (-2.7,-2.7) rectangle (2.7,2.7);
+		\foreach \pp in {-2.4,-1.8,...,2.4} {
+				\draw[line width=0.8pt] (\pp,2.7) -- (\pp,3.3);
+				\draw[line width=0.8pt] (\pp,-2.7) -- (\pp,-3.3);
+				\draw[line width=0.8pt] (2.7,\pp) -- (3.3,\pp);
+				\draw[line width=0.8pt] (-2.7,\pp) -- (-3.3,\pp);
+			}
+		\fill (-2.3,2.3) circle (0.1);
+
+		% die and 3x3 core grid, with the central core filled
+		\draw[line width=0.5pt] (-2.0,-2.0) rectangle (2.0,2.0);
+		\foreach \ix in {-1,0,1} {
+				\foreach \iy in {-1,0,1} {
+						\draw[line width=0.8pt] ({1.15*\ix-0.45},{1.15*\iy-0.45}) rectangle ++(0.9,0.9);
+					}
+			}
+		\fill (-0.45,-0.45) rectangle ++(0.9,0.9);
+	\end{tikzpicture}%
+}
+
+% ---------- Math / computing: bits, graph, integral, linear map ----------
+\newcommand{\coverDrawingMathComp}{%
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% subtle concentric rings
+		\foreach \ringr/\ringo in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\ringo, line width=0.5pt] (0,0) circle (\ringr);
+			}
+
+		% discrete math: a cycle graph whose vertices sit on the outer ring
+		\foreach \gang [count=\gi from 1] in {12,64,118,171,226,281,334} {
+				\coordinate (v\gi) at (\gang:7.0);
+			}
+		\draw[line width=0.7pt] (v1) -- (v2) -- (v3) -- (v4) -- (v5) -- (v6) -- (v7) -- cycle;
+		\foreach \gi in {1,3,4,6} {
+				\fill (v\gi) circle (0.16);
+			}
+		\foreach \gi in {2,5,7} {
+				\draw[line width=0.8pt, fill=white] (v\gi) circle (0.16);
+			}
+
+		% main circle
+		\draw[line width=1.1pt] (0,0) circle (4.2);
+
+		% ring of 32 bits: filled square = 1, empty square = 0
+		\foreach \bit [count=\bi from 0] in {1,0,1,1,0,1,0,0, 0,1,1,0,1,0,1,1, 1,0,0,1,0,1,1,0, 0,1,0,0,1,1,0,1} {
+				\pgfmathsetmacro{\ang}{\bi*360/32}
+				\ifnum\bit=1
+					\node[rectangle, minimum size=1.7mm, inner sep=0pt, rotate=\ang, draw, line width=0.6pt, fill=coverfg] at (\ang:4.9) {};
+				\else
+					\node[rectangle, minimum size=1.7mm, inner sep=0pt, rotate=\ang, draw, line width=0.6pt] at (\ang:4.9) {};
+				\fi
+			}
+
+		% integral: Riemann bars under a curve, clipped to the circle
+		\begin{scope}
+			\clip (0,0) circle (4.2);
+			\foreach \bx in {-4.2,-3.6,...,3.6} {
+					\draw[line width=0.5pt, fill=coverfg, fill opacity=0.08]
+					(\bx,-2.7) rectangle ({\bx+0.6},{-1.5+0.9*sin(\bx*45)});
+				}
+			\draw[line width=0.5pt] (-4.2,-2.7) -- (4.2,-2.7);
+			\draw[line width=1.1pt, domain=-4.2:4.2, samples=100]
+			plot (\x, {-1.5+0.9*sin(\x*45)});
+		\end{scope}
+
+		% linear algebra: unit square and its image under a linear map
+		\begin{scope}[shift={(0,0.5)}]
+			\draw[dashed, line width=0.5pt] (0,0) rectangle (1.6,1.6);
+			\draw[line width=0.8pt, fill=coverfg, fill opacity=0.06]
+			(0,0) -- (2.6,0.8) -- (1.7,2.9) -- (-0.9,2.1) -- cycle;
+			\draw[line width=1.1pt, -{Stealth[length=3mm,width=2.4mm]}] (0,0) -- (2.6,0.8);
+			\draw[line width=1.1pt, -{Stealth[length=3mm,width=2.4mm]}] (0,0) -- (-0.9,2.1);
+			\fill (0,0) circle (0.12);
+		\end{scope}
+	\end{tikzpicture}%
+}
+
+% ---------- Math / calculus: integral sign, partial derivative, infinity ----------
+\newcommand{\coverDrawingMathCalc}{%
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% subtle concentric rings
+		\foreach \ringr/\ringo in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\ringo, line width=0.5pt] (0,0) circle (\ringr);
+			}
+
+		% main circle
+		\draw[line width=1.1pt] (0,0) circle (4.2);
+
+		% partial derivative on the left, infinity (the limit) on the right
+		\begin{scope}[shift={(-3.0,0.35)}, scale=1.6, line width=1.1pt]
+			\dsympartial
+		\end{scope}
+		\begin{scope}[shift={(2.85,-1.0)}, scale=0.95]
+			\draw[line width=1.1pt, domain=0:360, samples=120, smooth]
+			plot ({1.05*cos(\x)/(1+sin(\x)*sin(\x))}, {1.05*sin(\x)*cos(\x)/(1+sin(\x)*sin(\x))});
+		\end{scope}
+
+		% integral sign, one stroke with a dot at each end, breaking out of the circle
+		\begin{scope}[shift={(-0.45,0)}, scale=1.3]
+			\draw[line width=2.2pt, line cap=round, fill=none]
+			(-1.0,-2.9) .. controls (-0.85,-3.6) and (-0.05,-3.7) .. (0.1,-2.7)
+			.. controls (0.2,-1.0) and (0.5,1.0) .. (0.6,2.7)
+			.. controls (0.75,3.7) and (1.55,3.6) .. (1.7,2.95);
+			\fill (-1.0,-2.9) circle (0.17);
+			\fill (1.7,2.95) circle (0.17);
+		\end{scope}
+	\end{tikzpicture}%
+}
+
+% ---------- Math / linear algebra: matrix as a crossbar with brackets ----------
+\newcommand{\coverDrawingMathLinAlg}{%
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% subtle concentric rings
+		\foreach \ringr/\ringo in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\ringo, line width=0.5pt] (0,0) circle (\ringr);
+			}
+
+		% row and column lines, ending in a dot on the inner ring
+		\foreach \cl in {-1.75,0,1.75} {
+				\pgfmathsetmacro{\hx}{sqrt(5.6*5.6-\cl*\cl)}
+				\draw[line width=0.5pt] (-\hx,\cl) -- (\hx,\cl);
+				\draw[line width=0.5pt] (\cl,-\hx) -- (\cl,\hx);
+				\fill (-\hx,\cl) circle (0.1);
+				\fill (\hx,\cl) circle (0.1);
+				\fill (\cl,-\hx) circle (0.1);
+				\fill (\cl,\hx) circle (0.1);
+			}
+
+		% main circle
+		\draw[line width=1.1pt] (0,0) circle (4.2);
+
+		% entries: filled square, open square, or a small dot (zero)
+		\foreach \ex/\ey/\et in {-1/1/1, 0/1/0, 1/1/2, -1/0/2, 0/0/1, 1/0/0, -1/-1/0, 0/-1/2, 1/-1/1} {
+				\ifnum\et=1
+					\fill ({1.75*\ex-0.45},{1.75*\ey-0.45}) rectangle ++(0.9,0.9);
+				\fi
+				\ifnum\et=0
+					\draw[line width=0.8pt, fill=white] ({1.75*\ex-0.45},{1.75*\ey-0.45}) rectangle ++(0.9,0.9);
+				\fi
+				\ifnum\et=2
+					\fill[white] ({1.75*\ex-0.35},{1.75*\ey-0.35}) rectangle ++(0.7,0.7);
+					\fill ({1.75*\ex},{1.75*\ey}) circle (0.1);
+				\fi
+			}
+
+		% brackets
+		\draw[line width=1.8pt] (-2.4,-2.85) -- (-2.9,-2.85) -- (-2.9,2.85) -- (-2.4,2.85);
+		\draw[line width=1.8pt] (2.4,-2.85) -- (2.9,-2.85) -- (2.9,2.85) -- (2.4,2.85);
+	\end{tikzpicture}%
+}
+
+% ---------- Math / discrete: Venn diagram inside a ring of logic and set symbols ----------
+% Symbol glyphs, each drawn in a box of about 0.7 x 0.7 around the origin
+\newcommand{\dsymand}{\draw (-0.3,-0.25) -- (0,0.3) -- (0.3,-0.25);}
+\newcommand{\dsymor}{\draw (-0.3,0.25) -- (0,-0.3) -- (0.3,0.25);}
+\newcommand{\dsymcup}{\draw (-0.28,0.3) -- (-0.28,-0.05) arc (180:360:0.28) -- (0.28,0.3);}
+\newcommand{\dsymcap}{\draw (-0.28,-0.3) -- (-0.28,0.05) arc (180:0:0.28) -- (0.28,-0.3);}
+\newcommand{\dsymall}{\draw (-0.3,0.3) -- (0,-0.3) -- (0.3,0.3); \draw (-0.15,0) -- (0.15,0);}
+\newcommand{\dsymex}{\draw (-0.25,0.3) -- (0.25,0.3) -- (0.25,-0.3) -- (-0.25,-0.3); \draw (-0.2,0) -- (0.25,0);}
+\newcommand{\dsymneg}{\draw (-0.3,0.1) -- (0.3,0.1) -- (0.3,-0.25);}
+\newcommand{\dsymxor}{\draw (0,0) circle (0.3); \draw (-0.3,0) -- (0.3,0); \draw (0,-0.3) -- (0,0.3);}
+\newcommand{\dsymin}{\draw (0.28,0.3) -- (-0.02,0.3) arc (90:270:0.3) -- (0.28,-0.3); \draw (-0.32,0) -- (0.28,0);}
+\newcommand{\dsymempty}{\draw (0,0) circle (0.24); \draw (-0.32,-0.32) -- (0.32,0.32);}
+\newcommand{\dsymimp}{\draw[-{Stealth[length=2mm,width=1.6mm]}] (-0.35,0) -- (0.35,0);}
+\newcommand{\dsymequiv}{\draw (-0.3,0.2) -- (0.3,0.2); \draw (-0.3,0) -- (0.3,0); \draw (-0.3,-0.2) -- (0.3,-0.2);}
+% Symbol used by the calculus cover
+\newcommand{\dsympartial}{%
+	\draw (0,-0.3) ellipse (0.55 and 0.6);
+	\draw (0.55,-0.3) -- (0.55,0.35) .. controls (0.55,0.95) and (0.05,1.0) .. (-0.3,0.65);%
+}
+
+\newcommand{\coverDrawingMathDiscrete}{%
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% subtle concentric rings
+		\foreach \ringr/\ringo in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\ringo, line width=0.5pt] (0,0) circle (\ringr);
+			}
+
+		% main circle
+		\draw[line width=1.1pt] (0,0) circle (4.2);
+
+		% ring of twelve symbols: and, or, union, intersection, for all, exists,
+		% not, xor, element of, empty set, implies, equivalent
+		\foreach \sg [count=\si from 0] in {and,or,cup,cap,all,ex,neg,xor,in,empty,imp,equiv} {
+				\begin{scope}[shift={({90-30*\si}:4.9)}, scale=1.5, line width=0.9pt, line cap=round]
+					\csname dsym\sg\endcsname
+				\end{scope}
+			}
+
+		% three sets (Venn diagram), the common region lightly filled
+		\begin{scope}[shift={(0,-0.34)}]
+			\begin{scope}
+				\clip (0,1.35) circle (2.3);
+				\clip (-1.17,-0.675) circle (2.3);
+				\fill[coverfg, fill opacity=0.12] (1.17,-0.675) circle (2.3);
+			\end{scope}
+			\draw[line width=1.1pt] (0,1.35) circle (2.3);
+			\draw[line width=1.1pt] (-1.17,-0.675) circle (2.3);
+			\draw[line width=1.1pt] (1.17,-0.675) circle (2.3);
+		\end{scope}
+	\end{tikzpicture}%
+}
+
+% ---------- No drawing ----------
+\newcommand{\coverDrawingNone}{}
+
+% ---------- Selector: picks the drawing named by \coverArea ----------
+\newcommand{\coverDrawing}{\csname coverDrawing\coverArea\endcsname}
+
+% ===== COVER DRAWINGS END =====
+
+% ============================================================
+% Hyperlinks and PDF metadata: links work, but stay invisible,
+% as in a printed document.
+% ============================================================
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+	pdftitle={\bookTitle: Study notes},
+	pdfauthor={\studentName},
+	pdfsubject={Study notes on \bookTitle},
+	pdfkeywords={\documentKeywords},
+}
+
+\begin{document}
+
+% ============================================================
+% Cover: simple thesis-style title page. White paper, everything
+% centered, normal page margins. Top: type of document and title.
+% Middle: the drawing chosen by \coverArea, the only decoration.
+% Bottom: author of the notes and date.
+% ============================================================
+\begin{titlepage}
+	\thispagestyle{empty}
+	\centering
+	\coverserif
+	\vspace*{1.5cm}
+
+	{\small\bfseries\color{coverdim}\MakeUppercase{Study notes}\par}
+	\vspace{0.4cm}
+	{\color{coverfg}\rule{2cm}{0.6pt}\par}
+	\vspace{1.0cm}
+
+	{\bfseries\fontsize{24}{30}\selectfont\color{coverfg} \bookTitle\par}
+	\vspace{0.8cm}
+	{\normalsize\color{coverdim} Based on the work of \bookAuthor\par}
+
+	\vfill
+
+	\coverDrawing
 
 	\vfill
 
