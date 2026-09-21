@@ -37,7 +37,6 @@ build/
 *.aux
 *.log
 *.out
-*.tex
 *.toc
 *.lof
 *.lot
@@ -52,7 +51,7 @@ build/
 *.makefile
 *.fdb_latexmk
 
-# Bibliography / glossary 
+# Bibliography / glossary
 *.bbl
 *.bcf
 *.blg

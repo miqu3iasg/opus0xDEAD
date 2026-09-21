@@ -1,0 +1,305 @@
+% ============================================================
+% LATEX TEMPLATE FOR STUDY NOTES (ENGLISH)
+% ============================================================
+% General-purpose template for converting study notes
+% (originally written in Markdown or in source code files)
+% into a LaTeX document, for any book.
+%
+% Design philosophy: body text in the standard LaTeX font (Computer
+% Modern), cover in Charter (serif, from PSNFSS), no other font
+% packages, no running header, no table of contents. The body follows
+% the model of a classic technical book: plain text, footer with the
+% page number only. The personality is concentrated in the cover:
+% solid, full page.
+%
+% This is the English version. All visible text in the document is
+% in English. The Portuguese version is the file template_pt-br.tex.
+%
+% Conversion instructions:
+%
+% - When converting notes from Markdown into this file, keep the
+%   original language of the notes exactly as written.
+% - Do not change, rewrite or translate the content of the notes.
+%   Only format it properly for LaTeX (sections, code blocks,
+%   emphasis, lists etc.).
+% - Code comments are part of the notes and must also be kept in
+%   the original language.
+% - If the notes of the book are in Portuguese, use the Portuguese
+%   version of the template (template_pt-br.tex), so that all
+%   visible text (cover, credits, fixed titles) follows the language
+%   of the notes.
+%
+% Usage:
+%
+% 1. Copy this file to start the notes for a new book.
+% 2. Fill in the fields marked with <...> in the "document variables"
+%    section below. It is the only place you need to edit to
+%    configure the whole document.
+% 3. If the book is not about programming, the listings package and
+%    the code block can be removed.
+% 4. Duplicate the section block for each chapter of notes.
+% 5. Compile with pdflatex (twice, so cross-references come out
+%    correct).
+
+\documentclass[12pt,a4paper]{article}
+
+% ============================================================
+% Language and encoding
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern} % Latin Modern: the standard vector version of Computer Modern
+
+% ============================================================
+% Page
+% ============================================================
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage[protrusion=true,expansion=true]{microtype}
+
+% ============================================================
+% Graphics and font used only on the cover. The cover font is
+% Charter (family "bch", from PSNFSS, included in any LaTeX
+% installation): serif, solid and sober. The document body stays in
+% Computer Modern. To change the cover font, edit only the family
+% code below (for example, "ppl" for Palatino or "ptm" for Times).
+% ============================================================
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta}
+\newcommand{\coverserif}{\fontfamily{bch}\selectfont}
+\usepackage{xcolor}
+% Monochrome scheme: graphite black and shades of gray over white.
+\definecolor{coverbg}{HTML}{0C0C0D}    % near-black graphite
+\definecolor{coverfg}{HTML}{F2F2F2}    % soft white (strokes and main text)
+\definecolor{coverdim}{HTML}{8C8C90}   % medium gray (secondary text)
+
+% ============================================================
+% Lists
+% ============================================================
+\usepackage{enumitem}
+\setlist{topsep=4pt,itemsep=2pt}
+
+% ============================================================
+% Footer: no header, only the page number.
+% ============================================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\footnotesize\thepage}
+
+% ============================================================
+% Code blocks: plain monospaced text, no frame, no background,
+% no line numbers.
+% ============================================================
+\usepackage{listings}
+
+% Replace "Scheme" with the language relevant to this book, or remove
+% this definition and use \lstset{language=...} with a language
+% already supported by listings (Python, C, Java etc.)
+\lstdefinelanguage{Scheme}{
+	morekeywords={},
+	sensitive=true,
+	morecomment=[l]{;},
+}
+
+\lstset{
+	language=Scheme,
+	basicstyle=\ttfamily\small,
+	commentstyle=\itshape,
+	frame=none,
+	numbers=none,
+	breaklines=true,
+	showstringspaces=false,
+	columns=fullflexible,
+	xleftmargin=1.5em,
+}
+
+% Inline terms/definitions: term in bold followed by running text,
+% no boxes and no color. Usage: \term{Definition} text...
+\newcommand{\term}[1]{\textbf{#1.}}
+
+% ============================================================
+% Document variables: fill these in for each new book
+% ============================================================
+\newcommand{\bookTitle}{<BOOK TITLE>}
+\newcommand{\bookShortTitle}{<SHORT TITLE OR ACRONYM>}
+\newcommand{\bookAuthor}{<BOOK AUTHOR(S)>}
+\newcommand{\studentName}{Miquéias Alves Medeiros}
+\newcommand{\documentKeywords}{<KEYWORD1, KEYWORD2, KEYWORD3>}
+% License: CC BY-NC-ND 4.0, the most restrictive of the Creative
+% Commons licenses (SPDX identifier: CC-BY-NC-ND-4.0). Allows only
+% reading and redistributing the unchanged work, with attribution.
+\newcommand{\documentLicense}{This material is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International license (SPDX: CC-BY-NC-ND-4.0). Reading and full redistribution with attribution are permitted; commercial use and the creation of derivative works are prohibited. \url{https://creativecommons.org/licenses/by-nc-nd/4.0/}}
+
+% Full bibliographic reference
+\newcommand{\fullReference}{%
+	<SURNAME>, <Name>. \textit{\bookTitle}. <edition>. <City>: <Publisher>, <year>.%
+}
+
+% ============================================================
+% Hyperlinks and PDF metadata: links work, but stay invisible,
+% as in a printed document.
+% ============================================================
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+	pdftitle={\bookTitle: Study notes},
+	pdfauthor={\studentName},
+	pdfsubject={Study notes on \bookTitle},
+	pdfkeywords={\documentKeywords},
+}
+
+\begin{document}
+
+% ============================================================
+% Cover: full page, full bleed, monochrome. Graphite background and
+% a single graphic motif: an abstract bipolar transistor (base,
+% collector and emitter) drawn in thin lines, surrounded by
+% concentric rings and connected to circuit traces that leave the
+% page. Serif typography (Charter) in capitals. No color besides
+% white and gray.
+% ============================================================
+\begin{titlepage}
+	\newgeometry{margin=0cm}
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture, overlay]
+		\def\cx{13.2}
+		\def\cy{10.6}
+		% solid background, full bleed
+		\fill[coverbg] (current page.south west) rectangle (current page.north east);
+
+		\begin{scope}[shift={(current page.south west)}]
+			\clip (0,0) rectangle (21,29.7);
+
+			% subtle concentric rings (bleeding off the edge)
+			\foreach \r/\o in {5.6/0.22,7.0/0.14,8.4/0.08,9.8/0.04} {
+					\draw[coverfg, draw opacity=\o, line width=0.5pt] (\cx,\cy) circle (\r cm);
+				}
+
+			% transistor envelope
+			\draw[coverfg, line width=1.1pt] (\cx,\cy) circle (4.2cm);
+
+			% base: channel bar and terminal on the left
+			\draw[coverfg, line width=4pt] (11.9,\cy-2.1) -- (11.9,\cy+2.1);
+			\draw[coverfg, line width=1.1pt] (2.6,\cy) -- (11.9,\cy);
+			\fill[coverfg] (2.6,\cy) circle (0.12cm);
+
+			% collector: diagonal and trace that goes up and exits to the right
+			\draw[coverfg, line width=1.1pt] (11.9,\cy+1.0) -- (14.6,\cy+3.2)
+			-- (14.6,17.2) -- (21,17.2);
+			\fill[coverfg] (14.6,17.2) circle (0.12cm);
+
+			% emitter: diagonal with arrow and trace that goes down and exits to the right
+			\draw[coverfg, line width=1.1pt, -{Stealth[length=3.2mm,width=2.6mm]}]
+			(11.9,\cy-1.0) -- (14.6,\cy-3.2);
+			\draw[coverfg, line width=1.1pt] (14.6,\cy-3.2) -- (14.6,6.0) -- (21,6.0);
+			\fill[coverfg] (14.6,6.0) circle (0.12cm);
+
+			% thin parallel traces, echoing the collector and emitter routes
+			\foreach \k/\o in {1/0.35,2/0.22,3/0.12} {
+					\draw[coverfg, draw opacity=\o, line width=0.5pt]
+					(14.6+\k*0.35,\cy+3.2+\k*0.1) -- (14.6+\k*0.35,17.2+\k*0.35) -- (21,17.2+\k*0.35);
+					\draw[coverfg, draw opacity=\o, line width=0.5pt]
+					(14.6+\k*0.35,\cy-3.2-\k*0.1) -- (14.6+\k*0.35,6.0-\k*0.35) -- (21,6.0-\k*0.35);
+				}
+
+			% square pads at the ends of the traces
+			\foreach \yy in {17.2,6.0} {
+					\draw[coverfg, line width=0.8pt] (19.9,\yy-0.3) rectangle ++(0.6,0.6);
+				}
+		\end{scope}
+
+		% pre-title
+		\node[anchor=north west, text=coverdim, font=\coverserif\small\bfseries,
+			xshift=2.6cm, yshift=-3.0cm]
+		at (current page.north west) {\MakeUppercase{Study notes}};
+		\draw[coverfg, line width=1.1pt]
+		($(current page.north west)+(2.6cm,-3.7cm)$) --
+		($(current page.north west)+(4.6cm,-3.7cm)$);
+
+		% title: left-aligned block
+		\node[anchor=north west, text=coverfg, font=\coverserif\bfseries\fontsize{27}{33}\selectfont,
+			execute at begin node={\hyphenpenalty=10000\relax\exhyphenpenalty=10000\relax},
+			align=left, text width=12.5cm, xshift=2.6cm, yshift=-6.2cm]
+		at (current page.north west) {\MakeUppercase{\bookTitle}};
+
+		% subtitle (author of the book)
+		\node[anchor=south west, text=coverdim, font=\coverserif\small,
+			execute at begin node={\hyphenpenalty=10000\relax\exhyphenpenalty=10000\relax},
+			align=left, text width=8cm, xshift=2.6cm, yshift=3.6cm]
+		at (current page.south west) {Based on the work of \bookAuthor};
+
+		% author of the notes and date, cover footer
+		\node[anchor=south west, text=coverfg, font=\coverserif\bfseries,
+			xshift=2.6cm, yshift=2.1cm]
+		at (current page.south west) {\studentName};
+		\node[anchor=south west, text=coverdim, font=\coverserif\footnotesize,
+			xshift=2.6cm, yshift=1.4cm]
+		at (current page.south west) {\today};
+	\end{tikzpicture}
+	\restoregeometry
+\end{titlepage}
+
+% ============================================================
+% Credits page (back of the cover): the equivalent of the copyright
+% page of a printed book, anchored to the bottom of the page.
+% ============================================================
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{flushleft}
+	\footnotesize
+	\bookTitle: Study notes\par
+	\smallskip
+	Based on the work of \bookAuthor.
+	\par
+	\smallskip
+	Notes written by \studentName\ on \today.
+	\par
+	\smallskip
+	\documentLicense
+\end{flushleft}
+\newpage
+
+% ============================================================
+% Dedication: a single sentence, vertically centered on the page
+% and right-aligned.
+% ============================================================
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{flushright}
+	\itshape I fight on the battlefield for those I love.
+\end{flushright}
+\vspace*{\fill}
+\newpage
+
+% ============================================================
+% Content: duplicate the block below for each chapter
+% ============================================================
+\section{Notes on ch. <NUMBER>: <CHAPTER TITLE>, pp. <XX> to <XX>}
+
+Introductory or explanatory text goes here.
+
+\term{Definition} Use this convention for key concepts: the term
+in bold, followed by running text, with no boxes or color highlights.
+
+% Remove this block if not applicable to the book
+\begin{lstlisting}
+<example code here>
+\end{lstlisting}
+
+More explanatory text.
+
+\newpage
+% The thebibliography environment already inserts the "References"
+% title (via \refname, translated by babel); do not add
+% \section*{References}.
+\begin{thebibliography}{9}
+
+	\bibitem{reference1}
+	\fullReference
+
+\end{thebibliography}
+
+\end{document}
