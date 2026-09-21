@@ -5,12 +5,12 @@
 % (originally written in Markdown or in source code files)
 % into a LaTeX document, for any book.
 %
-% Design philosophy: body text in the standard LaTeX font (Computer
-% Modern), cover in Charter (serif, from PSNFSS), no other font
-% packages, no running header, no table of contents. The body follows
+% Design philosophy: body text and cover in the standard LaTeX font (Computer
+% Modern), no other font packages, no running header, no table of contents. The body follows
 % the model of a classic technical book: plain text, footer with the
-% page number only. The personality is concentrated in the cover:
-% solid, full page.
+% page number only. The cover follows the model of a simple thesis
+% title page: white paper, centered text, and a single small
+% drawing (a transistor) as the only decoration.
 %
 % This is the English version. All visible text in the document is
 % in English. The Portuguese version is the file template_pt-br.tex.
@@ -59,20 +59,19 @@
 \usepackage[protrusion=true,expansion=true]{microtype}
 
 % ============================================================
-% Graphics and font used only on the cover. The cover font is
-% Charter (family "bch", from PSNFSS, included in any LaTeX
-% installation): serif, solid and sober. The document body stays in
-% Computer Modern. To change the cover font, edit only the family
-% code below (for example, "ppl" for Palatino or "ptm" for Times).
+% Graphics and font used only on the cover. The cover uses the same
+% font as the body (Computer Modern), as in a classic thesis title
+% page. To use a different font on the cover only, edit the command
+% below (for example, \fontfamily{bch}\selectfont for Charter,
+% "ppl" for Palatino or "ptm" for Times).
 % ============================================================
 \usepackage{tikz}
-\usetikzlibrary{calc,arrows.meta}
-\newcommand{\coverserif}{\fontfamily{bch}\selectfont}
+\usetikzlibrary{arrows.meta}
+\newcommand{\coverserif}{\rmfamily}
 \usepackage{xcolor}
-% Monochrome scheme: graphite black and shades of gray over white.
-\definecolor{coverbg}{HTML}{0C0C0D}    % near-black graphite
-\definecolor{coverfg}{HTML}{F2F2F2}    % soft white (strokes and main text)
-\definecolor{coverdim}{HTML}{8C8C90}   % medium gray (secondary text)
+% Classic scheme: black ink on white paper, gray for secondary text.
+\definecolor{coverfg}{HTML}{000000}    % black (strokes and main text)
+\definecolor{coverdim}{HTML}{555555}   % dark gray (secondary text)
 
 % ============================================================
 % Lists
@@ -154,92 +153,76 @@
 \begin{document}
 
 % ============================================================
-% Cover: full page, full bleed, monochrome. Graphite background and
-% a single graphic motif: an abstract bipolar transistor (base,
-% collector and emitter) drawn in thin lines, surrounded by
-% concentric rings and connected to circuit traces that leave the
-% page. Serif typography (Charter) in capitals. No color besides
-% white and gray.
+% Cover: simple thesis-style title page. White paper, everything
+% centered, normal page margins. Top: type of document and title.
+% Middle: a drawing of an abstract bipolar transistor (base,
+% collector and emitter) in thin lines, surrounded by rings and
+% connected to circuit traces, the only decoration.
+% Bottom: author of the notes and date.
 % ============================================================
 \begin{titlepage}
-	\newgeometry{margin=0cm}
 	\thispagestyle{empty}
-	\begin{tikzpicture}[remember picture, overlay]
-		\def\cx{13.2}
-		\def\cy{10.6}
-		% solid background, full bleed
-		\fill[coverbg] (current page.south west) rectangle (current page.north east);
+	\centering
+	\coverserif
+	\vspace*{1.5cm}
 
-		\begin{scope}[shift={(current page.south west)}]
-			\clip (0,0) rectangle (21,29.7);
+	{\small\bfseries\color{coverdim}\MakeUppercase{Study notes}\par}
+	\vspace{0.4cm}
+	{\color{coverfg}\rule{2cm}{0.6pt}\par}
+	\vspace{1.0cm}
 
-			% subtle concentric rings (bleeding off the edge)
-			\foreach \r/\o in {5.6/0.22,7.0/0.14,8.4/0.08,9.8/0.04} {
-					\draw[coverfg, draw opacity=\o, line width=0.5pt] (\cx,\cy) circle (\r cm);
-				}
+	{\bfseries\fontsize{24}{30}\selectfont\color{coverfg} \bookTitle\par}
+	\vspace{0.8cm}
+	{\normalsize\color{coverdim} Based on the work of \bookAuthor\par}
 
-			% transistor envelope
-			\draw[coverfg, line width=1.1pt] (\cx,\cy) circle (4.2cm);
+	\vfill
 
-			% base: channel bar and terminal on the left
-			\draw[coverfg, line width=4pt] (11.9,\cy-2.1) -- (11.9,\cy+2.1);
-			\draw[coverfg, line width=1.1pt] (2.6,\cy) -- (11.9,\cy);
-			\fill[coverfg] (2.6,\cy) circle (0.12cm);
+	% transistor drawing: concentric rings, envelope, base/collector/emitter,
+	% parallel traces and square pads at the ends of the traces
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% subtle concentric rings
+		\foreach \r/\o in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\o, line width=0.5pt] (0,0) circle (\r);
+			}
 
-			% collector: diagonal and trace that goes up and exits to the right
-			\draw[coverfg, line width=1.1pt] (11.9,\cy+1.0) -- (14.6,\cy+3.2)
-			-- (14.6,17.2) -- (21,17.2);
-			\fill[coverfg] (14.6,17.2) circle (0.12cm);
+		% transistor envelope
+		\draw[line width=1.1pt] (0,0) circle (4.2);
 
-			% emitter: diagonal with arrow and trace that goes down and exits to the right
-			\draw[coverfg, line width=1.1pt, -{Stealth[length=3.2mm,width=2.6mm]}]
-			(11.9,\cy-1.0) -- (14.6,\cy-3.2);
-			\draw[coverfg, line width=1.1pt] (14.6,\cy-3.2) -- (14.6,6.0) -- (21,6.0);
-			\fill[coverfg] (14.6,6.0) circle (0.12cm);
+		% base: channel bar and terminal on the left
+		\draw[line width=4pt] (-1.3,-2.1) -- (-1.3,2.1);
+		\draw[line width=1.1pt] (-7.8,0) -- (-1.3,0);
+		\fill (-7.8,0) circle (0.12);
 
-			% thin parallel traces, echoing the collector and emitter routes
-			\foreach \k/\o in {1/0.35,2/0.22,3/0.12} {
-					\draw[coverfg, draw opacity=\o, line width=0.5pt]
-					(14.6+\k*0.35,\cy+3.2+\k*0.1) -- (14.6+\k*0.35,17.2+\k*0.35) -- (21,17.2+\k*0.35);
-					\draw[coverfg, draw opacity=\o, line width=0.5pt]
-					(14.6+\k*0.35,\cy-3.2-\k*0.1) -- (14.6+\k*0.35,6.0-\k*0.35) -- (21,6.0-\k*0.35);
-				}
+		% collector: diagonal and trace that goes up and exits to the right
+		\draw[line width=1.1pt] (-1.3,1.0) -- (1.4,3.2) -- (1.4,6.6) -- (7.8,6.6);
+		\fill (1.4,6.6) circle (0.12);
 
-			% square pads at the ends of the traces
-			\foreach \yy in {17.2,6.0} {
-					\draw[coverfg, line width=0.8pt] (19.9,\yy-0.3) rectangle ++(0.6,0.6);
-				}
-		\end{scope}
+		% emitter: diagonal with arrow and trace that goes down and exits to the right
+		\draw[line width=1.1pt, -{Stealth[length=3mm,width=2.4mm]}]
+		(-1.3,-1.0) -- (1.4,-3.2);
+		\draw[line width=1.1pt] (1.4,-3.2) -- (1.4,-4.6) -- (7.8,-4.6);
+		\fill (1.4,-4.6) circle (0.12);
 
-		% pre-title
-		\node[anchor=north west, text=coverdim, font=\coverserif\small\bfseries,
-			xshift=2.6cm, yshift=-3.0cm]
-		at (current page.north west) {\MakeUppercase{Study notes}};
-		\draw[coverfg, line width=1.1pt]
-		($(current page.north west)+(2.6cm,-3.7cm)$) --
-		($(current page.north west)+(4.6cm,-3.7cm)$);
+		% thin parallel traces, echoing the collector and emitter routes
+		\foreach \k/\o in {1/0.35,2/0.22,3/0.12} {
+				\draw[draw opacity=\o, line width=0.5pt]
+				(1.4+\k*0.35,3.2+\k*0.1) -- (1.4+\k*0.35,6.6+\k*0.35) -- (7.8,6.6+\k*0.35);
+				\draw[draw opacity=\o, line width=0.5pt]
+				(1.4+\k*0.35,-3.2-\k*0.1) -- (1.4+\k*0.35,-4.6-\k*0.35) -- (7.8,-4.6-\k*0.35);
+			}
 
-		% title: left-aligned block
-		\node[anchor=north west, text=coverfg, font=\coverserif\bfseries\fontsize{27}{33}\selectfont,
-			execute at begin node={\hyphenpenalty=10000\relax\exhyphenpenalty=10000\relax},
-			align=left, text width=12.5cm, xshift=2.6cm, yshift=-6.2cm]
-		at (current page.north west) {\MakeUppercase{\bookTitle}};
-
-		% subtitle (author of the book)
-		\node[anchor=south west, text=coverdim, font=\coverserif\small,
-			execute at begin node={\hyphenpenalty=10000\relax\exhyphenpenalty=10000\relax},
-			align=left, text width=8cm, xshift=2.6cm, yshift=3.6cm]
-		at (current page.south west) {Based on the work of \bookAuthor};
-
-		% author of the notes and date, cover footer
-		\node[anchor=south west, text=coverfg, font=\coverserif\bfseries,
-			xshift=2.6cm, yshift=2.1cm]
-		at (current page.south west) {\studentName};
-		\node[anchor=south west, text=coverdim, font=\coverserif\footnotesize,
-			xshift=2.6cm, yshift=1.4cm]
-		at (current page.south west) {\today};
+		% square pads at the ends of the traces
+		\foreach \yy in {6.6,-4.6} {
+				\draw[line width=0.8pt] (6.7,\yy-0.3) rectangle ++(0.6,0.6);
+			}
 	\end{tikzpicture}
-	\restoregeometry
+
+	\vfill
+
+	{\large\bfseries\color{coverfg} \studentName\par}
+	\vspace{0.3cm}
+	{\small\color{coverdim} \today\par}
+	\vspace*{1cm}
 \end{titlepage}
 
 % ============================================================

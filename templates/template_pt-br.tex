@@ -5,12 +5,13 @@
 % (originalmente escritas em Markdown ou em arquivos de código)
 % para um documento LaTeX, para qualquer livro.
 %
-% Filosofia de design: corpo em fonte padrão do LaTeX (Computer
-% Modern), capa em Charter (serifada, do PSNFSS), sem outros pacotes
-% de fonte, sem cabeçalho, sem sumário. O corpo segue o modelo de um
-% livro técnico clássico: texto simples, rodapé apenas com o número
-% de página. A personalidade fica concentrada na capa, sólida, de
-% página inteira.
+% Filosofia de design: corpo e capa em fonte padrão do LaTeX
+% (Computer Modern), sem outros pacotes de fonte, sem cabeçalho,
+% sem sumário. O corpo segue o modelo de um livro técnico clássico:
+% texto simples, rodapé apenas com o número de página. A capa segue
+% o modelo de uma folha de rosto simples de tese: papel branco,
+% texto centralizado e um único desenho (um transistor) como
+% única decoração.
 %
 % Esta é a versão em português (pt-BR). Todo o texto visível do
 % documento está em português. A versão em inglês é o arquivo
@@ -59,20 +60,19 @@
 \usepackage[protrusion=true,expansion=true]{microtype}
 
 % ============================================================
-% Recursos gráficos e fonte usados apenas na capa. A fonte da capa é
-% a Charter (família "bch", do PSNFSS, incluída em qualquer instalação
-% LaTeX): serifada, sólida e sóbria. O corpo do documento continua em
-% Computer Modern. Para trocar a fonte da capa, altere apenas o código
-% da família abaixo (por exemplo, "ppl" para Palatino ou "ptm" para Times).
+% Recursos gráficos e fonte usados apenas na capa. A capa usa a
+% mesma fonte do corpo (Computer Modern), como em uma folha de rosto
+% clássica de tese. Para usar outra fonte apenas na capa, altere o
+% comando abaixo (por exemplo, \fontfamily{bch}\selectfont para
+% Charter, "ppl" para Palatino ou "ptm" para Times).
 % ============================================================
 \usepackage{tikz}
-\usetikzlibrary{calc,arrows.meta}
-\newcommand{\coverserif}{\fontfamily{bch}\selectfont}
+\usetikzlibrary{arrows.meta}
+\newcommand{\coverserif}{\rmfamily}
 \usepackage{xcolor}
-% Esquema monocromático: preto grafite e tons de cinza sobre branco.
-\definecolor{coverbg}{HTML}{0C0C0D}    % grafite quase preto
-\definecolor{coverfg}{HTML}{F2F2F2}    % branco suave (traços e texto principal)
-\definecolor{coverdim}{HTML}{8C8C90}   % cinza médio (texto secundário)
+% Esquema clássico: tinta preta sobre papel branco, cinza para texto secundário.
+\definecolor{coverfg}{HTML}{000000}    % preto (traços e texto principal)
+\definecolor{coverdim}{HTML}{555555}   % cinza escuro (texto secundário)
 
 % ============================================================
 % Listas
@@ -166,92 +166,76 @@
 \begin{document}
 
 % ============================================================
-% Capa: página inteira, sangria total, monocromática. Fundo grafite
-% e um único motivo gráfico: um transistor bipolar abstrato (base,
-% coletor e emissor) desenhado em traços finos, envolto por anéis
-% concêntricos e ligado a trilhas de circuito que saem da página.
-% Tipografia serifada (Charter) em caixa-alta. Sem cor além de
-% branco e cinza.
+% Capa: folha de rosto simples, no estilo de tese. Papel branco,
+% tudo centralizado, margens normais de página. No topo: tipo de
+% documento e título. No meio: um desenho de um transistor bipolar
+% abstrato (base, coletor e emissor) em traços finos, envolto por
+% anéis e ligado a trilhas de circuito, única decoração. No rodapé:
+% autor das notas e data.
 % ============================================================
 \begin{titlepage}
-	\newgeometry{margin=0cm}
 	\thispagestyle{empty}
-	\begin{tikzpicture}[remember picture, overlay]
-		\def\cx{13.2}
-		\def\cy{10.6}
-		% fundo sólido, sangria total
-		\fill[coverbg] (current page.south west) rectangle (current page.north east);
+	\centering
+	\coverserif
+	\vspace*{1.5cm}
 
-		\begin{scope}[shift={(current page.south west)}]
-			\clip (0,0) rectangle (21,29.7);
+	{\small\bfseries\color{coverdim}\MakeUppercase{Notas de estudo}\par}
+	\vspace{0.4cm}
+	{\color{coverfg}\rule{2cm}{0.6pt}\par}
+	\vspace{1.0cm}
 
-			% anéis concêntricos discretos (sangram pela borda)
-			\foreach \r/\o in {5.6/0.22,7.0/0.14,8.4/0.08,9.8/0.04} {
-					\draw[coverfg, draw opacity=\o, line width=0.5pt] (\cx,\cy) circle (\r cm);
-				}
+	{\bfseries\fontsize{24}{30}\selectfont\color{coverfg} \bookTitle\par}
+	\vspace{0.8cm}
+	{\normalsize\color{coverdim} Baseado na obra de \bookAuthor\par}
 
-			% envoltório do transistor
-			\draw[coverfg, line width=1.1pt] (\cx,\cy) circle (4.2cm);
+	\vfill
 
-			% base: barra do canal e terminal à esquerda
-			\draw[coverfg, line width=4pt] (11.9,\cy-2.1) -- (11.9,\cy+2.1);
-			\draw[coverfg, line width=1.1pt] (2.6,\cy) -- (11.9,\cy);
-			\fill[coverfg] (2.6,\cy) circle (0.12cm);
+	% desenho do transistor: anéis concêntricos, envoltório, base/coletor/emissor,
+	% trilhas paralelas e almofadas quadradas nas pontas das trilhas
+	\begin{tikzpicture}[scale=0.65, coverfg]
+		% anéis concêntricos discretos
+		\foreach \r/\o in {5.6/0.22,7.0/0.12} {
+				\draw[draw opacity=\o, line width=0.5pt] (0,0) circle (\r);
+			}
 
-			% coletor: diagonal e trilha que sobe e sai pela direita
-			\draw[coverfg, line width=1.1pt] (11.9,\cy+1.0) -- (14.6,\cy+3.2)
-			-- (14.6,17.2) -- (21,17.2);
-			\fill[coverfg] (14.6,17.2) circle (0.12cm);
+		% envoltório do transistor
+		\draw[line width=1.1pt] (0,0) circle (4.2);
 
-			% emissor: diagonal com seta e trilha que desce e sai pela direita
-			\draw[coverfg, line width=1.1pt, -{Stealth[length=3.2mm,width=2.6mm]}]
-			(11.9,\cy-1.0) -- (14.6,\cy-3.2);
-			\draw[coverfg, line width=1.1pt] (14.6,\cy-3.2) -- (14.6,6.0) -- (21,6.0);
-			\fill[coverfg] (14.6,6.0) circle (0.12cm);
+		% base: barra do canal e terminal à esquerda
+		\draw[line width=4pt] (-1.3,-2.1) -- (-1.3,2.1);
+		\draw[line width=1.1pt] (-7.8,0) -- (-1.3,0);
+		\fill (-7.8,0) circle (0.12);
 
-			% trilhas paralelas finas, ecoando a rota do coletor e do emissor
-			\foreach \k/\o in {1/0.35,2/0.22,3/0.12} {
-					\draw[coverfg, draw opacity=\o, line width=0.5pt]
-					(14.6+\k*0.35,\cy+3.2+\k*0.1) -- (14.6+\k*0.35,17.2+\k*0.35) -- (21,17.2+\k*0.35);
-					\draw[coverfg, draw opacity=\o, line width=0.5pt]
-					(14.6+\k*0.35,\cy-3.2-\k*0.1) -- (14.6+\k*0.35,6.0-\k*0.35) -- (21,6.0-\k*0.35);
-				}
+		% coletor: diagonal e trilha que sobe e sai pela direita
+		\draw[line width=1.1pt] (-1.3,1.0) -- (1.4,3.2) -- (1.4,6.6) -- (7.8,6.6);
+		\fill (1.4,6.6) circle (0.12);
 
-			% almofadas quadradas nas pontas das trilhas
-			\foreach \yy in {17.2,6.0} {
-					\draw[coverfg, line width=0.8pt] (19.9,\yy-0.3) rectangle ++(0.6,0.6);
-				}
-		\end{scope}
+		% emissor: diagonal com seta e trilha que desce e sai pela direita
+		\draw[line width=1.1pt, -{Stealth[length=3mm,width=2.4mm]}]
+		(-1.3,-1.0) -- (1.4,-3.2);
+		\draw[line width=1.1pt] (1.4,-3.2) -- (1.4,-4.6) -- (7.8,-4.6);
+		\fill (1.4,-4.6) circle (0.12);
 
-		% pré-título
-		\node[anchor=north west, text=coverdim, font=\coverserif\small\bfseries,
-			xshift=2.6cm, yshift=-3.0cm]
-		at (current page.north west) {\MakeUppercase{Notas de estudo}};
-		\draw[coverfg, line width=1.1pt]
-		($(current page.north west)+(2.6cm,-3.7cm)$) --
-		($(current page.north west)+(4.6cm,-3.7cm)$);
+		% trilhas paralelas finas, ecoando a rota do coletor e do emissor
+		\foreach \k/\o in {1/0.35,2/0.22,3/0.12} {
+				\draw[draw opacity=\o, line width=0.5pt]
+				(1.4+\k*0.35,3.2+\k*0.1) -- (1.4+\k*0.35,6.6+\k*0.35) -- (7.8,6.6+\k*0.35);
+				\draw[draw opacity=\o, line width=0.5pt]
+				(1.4+\k*0.35,-3.2-\k*0.1) -- (1.4+\k*0.35,-4.6-\k*0.35) -- (7.8,-4.6-\k*0.35);
+			}
 
-		% título: bloco alinhado à esquerda
-		\node[anchor=north west, text=coverfg, font=\coverserif\bfseries\fontsize{27}{33}\selectfont,
-			execute at begin node={\hyphenpenalty=10000\relax\exhyphenpenalty=10000\relax},
-			align=left, text width=12.5cm, xshift=2.6cm, yshift=-6.2cm]
-		at (current page.north west) {\MakeUppercase{\bookTitle}};
-
-		% subtítulo (autor da obra)
-		\node[anchor=south west, text=coverdim, font=\coverserif\small,
-			execute at begin node={\hyphenpenalty=10000\relax\exhyphenpenalty=10000\relax},
-			align=left, text width=8cm, xshift=2.6cm, yshift=3.6cm]
-		at (current page.south west) {Baseado na obra de \bookAuthor};
-
-		% autor das notas e data, rodapé da capa
-		\node[anchor=south west, text=coverfg, font=\coverserif\bfseries,
-			xshift=2.6cm, yshift=2.1cm]
-		at (current page.south west) {\studentName};
-		\node[anchor=south west, text=coverdim, font=\coverserif\footnotesize,
-			xshift=2.6cm, yshift=1.4cm]
-		at (current page.south west) {\today};
+		% almofadas quadradas nas pontas das trilhas
+		\foreach \yy in {6.6,-4.6} {
+				\draw[line width=0.8pt] (6.7,\yy-0.3) rectangle ++(0.6,0.6);
+			}
 	\end{tikzpicture}
-	\restoregeometry
+
+	\vfill
+
+	{\large\bfseries\color{coverfg} \studentName\par}
+	\vspace{0.3cm}
+	{\small\color{coverdim} \today\par}
+	\vspace*{1cm}
 \end{titlepage}
 
 % ============================================================
