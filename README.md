@@ -28,13 +28,13 @@ The complete structure of the education is maintained in the `curriculum/` direc
 │
 ├── templates/
 │   ├── meta-template.md
-│   └── notes.tex.template
+│   └── notes_en.tex
+│   └── notes_pt-br.tex
 │
 ├── <COURSE_CODE>/
 │   ├── meta.md
 │   ├── resources/
 │   ├── templates/
-│   │   └── notes.tex.template
 │   ├── exports/
 │   ├── C01-<chapter-title>/
 │   │   ├── notes/
