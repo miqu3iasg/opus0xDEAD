@@ -1,1 +1,0 @@
-- [ ] Lembrar de coloar o livro Programming in C (4th Edition) by Stephen G. Kochan como parte do curso
