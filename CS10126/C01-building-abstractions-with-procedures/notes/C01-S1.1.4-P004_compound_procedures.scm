@@ -1,7 +1,7 @@
 ; File:          C01-S1.1.4-P004_compound_procedures.scm
 ; Author:        Miquéias Alves Medeiros <https://github.com/miqu3iasg>
 ; Created:       2026-09-23
-; Modified:      2026-09-23
+; Modified:      2026-09-24
 ; Source:        Structure and Interpreation of Computer Programs (SICP)
 ; By:            Harold Abelson, Gerald Jay Sussman, Julie Sussman
 ; Location:      pp. 15-18
