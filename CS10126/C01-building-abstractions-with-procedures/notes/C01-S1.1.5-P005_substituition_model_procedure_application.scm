@@ -15,7 +15,6 @@
 ; Copyright:     (c) 2026 Miquéias Alves Medeiros <https://github.com/miqu3iasg>.
 
 
-
 ; To evaluate a combination in which the operator names a compound procedure, the
 ; interpreter follows pratically the same steps used for combinations whose the operators
 ; name primitive procedures, which we saw in the section 1.1.3.

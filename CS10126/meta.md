@@ -91,3 +91,4 @@ By completing this book, I should be able to:
 - MIT Press — Structure and Interpretation of Computer Programs: [https://mitpress.mit.edu/9780262510875/structure-and-interpretation-of-computer-programs/](https://mitpress.mit.edu/9780262510875/structure-and-interpretation-of-computer-programs/) 
 - SICP — Official MIT Website: [https://web.mit.edu/6.001/6.037/](https://web.mit.edu/6.001/6.037/) 
 - SICP — Online Text: [https://web.mit.edu/6.001/6.037/sicp.pdf](https://web.mit.edu/6.001/6.037/sicp.pdf)
+- Conditions and predicates in Scheme: [https://jaredkrinke.github.io/learn-scheme/1-1-6-conditionalexp.html](https://jaredkrinke.github.io/learn-scheme/1-1-6-conditionalexp.html)
