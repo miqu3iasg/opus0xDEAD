@@ -6,11 +6,10 @@
 ;;; By:            Harold Abelson, Gerald Jay Sussman, Julie Sussman
 ;;; Location:      p. 26
 ;;;
-;;; Description:
-;;;     Solutions for SICP Exercise 1.1. This file presents a sequence of basic
-;;;     Scheme expressions—covering arithmetic operations, variable definitions,
-;;;     and conditional logic (if, cond, and)—along with step-by-step evaluations
-;;;     and expected interpreter outputs, demonstrating the substitution model.
+;;; Solutions for SICP Exercise 1.1. This file presents a sequence of basic
+;;; Scheme expressions—covering arithmetic operations, variable definitions,
+;;; and conditional logic (if, cond, and)—along with step-by-step evaluations
+;;; and expected interpreter outputs, demonstrating the substitution model.
 ;;;
 ;;; Problem Statement:
 ;;;     Exercise 1.1: Below is a sequence of expressions. What is the result
@@ -28,6 +27,7 @@
 ;;;
 ;;; SPDX-License-Identifier: AGPL-3.0-only
 ;;; Copyright:     (c) 2026 Miquéias Medeiros <https://github.com/miqu3iasg>.
+
 
 ;;; Expression 01
 ;; Here the interpreter returns the number itself. So the result is simply 10.
