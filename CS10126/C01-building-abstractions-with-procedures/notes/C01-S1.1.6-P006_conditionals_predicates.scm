@@ -6,7 +6,12 @@
 ; By:            Harold Abelson, Gerald Jay Sussman, Julie Sussman
 ; Location:      pp. 22-25
 ;
-; what you implemented / learned here
+; Studied conditional expressions and predicates in Scheme, including case analysis,
+; piecewise functions, and the use of `cond` and `if` to express conditional behavior.
+; Explored the evaluation of predicates and clauses, the use of `else` as a default case,
+; and the correspondence between conditional procedures and mathematical piecewise
+; definitions. Also studied logical composition with `and`, `or`, and `not`, and used
+; these operators to construct compound predicates and express relational conditions.
 ;
 ; SPDX-License-Identifier: AGPL-3.0-only
 ; Copyright:     (c) 2026 Miquéias Alves Medeiros <https://github.com/miqu3iasg>.
@@ -63,3 +68,56 @@
 ;       { -x if X < 0
 ; |x| = {
 ;       {  x for any other case
+
+; Here is another way to way to write the absolute-value procedure
+
+(define (abs x)
+  (if (< x 0) (- x) x))
+
+; The structure is (if <predicate> <consequent> <alternative>).
+
+; Essentially, its like an if-else statement from other languages, but with an implicit
+; `else`. The interpreter evalutes first the <predicate>, and if it is a true value, the
+; interpreter evalues the <consequent> and returns its value. On the other hand, if the
+; the result of the predicate returns a false value, the interpreter evalutes the
+; <alternative> and return its value.
+
+; In addition to primitive predicates such as <, =, and >, there are more logical composition
+; operations that we can use to construct expressions, and, in turn, compound expressions.
+; Among them, the three most widely used are:
+;
+; (and ⟨e_1⟩ . . . ⟨e_n⟩)
+; (or ⟨e_1⟩ . . . ⟨e_n⟩)
+; (not ⟨e⟩)
+;
+; These operate using the logical structure already known from other programming languages.
+
+; As an example of how these are used, we can express a number x in the interval 5 < x < 10 as
+(and (> x 5) (< x 10))
+
+; As another example, we can deﬁne a predicate to test whether one number is greater than
+; or equal to another as
+(define (>= x  y) (or (> x y) (= x y)))
+
+; In another language, this could be expressed, for example, in an if statement, as
+;
+; if (x >= y) {
+;     ...
+; }
+;
+; if (x > y || x == y) {
+;     ...
+; }
+
+; Or, alternatively, we can write the same predicate in the following way
+(define (>= x y) (not (< x y)))
+
+; which could be expressed in another programming language as
+;
+; if (x >= y) {
+;     ...
+; }
+;
+; if (!(x < y)) {
+;     ...
+; }
