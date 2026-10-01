@@ -10,7 +10,6 @@
 ;;; Programs (SICP), which asks to translate a given arithmetic expression from
 ;;; conventional infix notation into Scheme's prefix notation.
 ;;;
-;;;
 ;;; Problem Statement:
 ;;;     Exercise 1.2: Translate the following expression into prefix form.
 ;;;
