@@ -33,7 +33,6 @@ __pycache__/
 .mypy_cache/
 
 # LaTeX (latexmk / vimtex compilation artifacts)
-build/
 *.aux
 *.log
 *.out
@@ -50,6 +49,11 @@ build/
 *.figlist
 *.makefile
 *.fdb_latexmk
+
+# Typst / LaTeX build output (keep only PDFs)
+build/**
+!build/**/
+!build/**/*.pdf
 
 # Bibliography / glossary
 *.bbl
@@ -71,7 +75,6 @@ build/
 *.ilg
 
 # Build directories
-build/
 dist/
 target/
 out/
