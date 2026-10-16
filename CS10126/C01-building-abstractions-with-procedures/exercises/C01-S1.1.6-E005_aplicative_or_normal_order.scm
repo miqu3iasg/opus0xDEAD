@@ -21,6 +21,8 @@
 ;;;     - C01-S1.1.5-P005_substituition_model_procedure_application.scm
 ;;;     - C01-S1.1.6-P006_conditionals_predicates.scm
 ;;;     - C01-S1.1.4-P004_compound_procedures.scm
+;;;     - https://berkeley-cs61as.github.io/textbook/normal-order-and-applicative-order.html
+;;;     - https://cs.stackexchange.com/questions/40758/difference-between-normal-order-and-applicative-order-evaluation
 ;;;
 ;;; SPDX-License-Identifier: AGPL-3.0-only
 ;;; Copyright:     (c) 2026 Miquéias Medeiros <https://github.com/miqu3iasg>.
@@ -63,7 +65,7 @@ so its evaluation never ends, it is a infinite loop.
 
 (test 0 (p))
 
-;; Substituting the values, we have:
+;; Substituting x = 0 and y = (p), we have:
 
 #; (define (test 0 (p))
   (if (= 0 0) 0 y))  ; => true
@@ -77,6 +79,22 @@ using, the output of the test function needs to be different for each case
 (x for applicative-order evaluation and y for normal-order evaluation). Why?
 I can't answer it yet.
 
-TODO: figure out what rule is definied to distinguish between applicative and
-normal-order evaluation in `test` procedure.
+Doing some searches, I figured out that the aplicative-order evaluates the
+paremeters first, and then applies the body of the function. So, if the
+interpreter is using applicative-order, it never finish the evaluation in this
+case, because one of the parameters is a recursive function (p) that calls itself
+indefinitely as we discussed above. So my first statement where I say that x is
+zero following the applicative-order is not valid.
+
+In contrast, when the interpreter uses normal-order evaluation, we get a
+different result. The interpreter substitutes the parameters with the
+corresponding arguments without evaluating them first, so we get something like
+this:
+
+(test 0 (p)) => (if (= 0 0) 0 (p))
+
+Then, it evaluates the condition `(= 0 0)`, which is true.
+
+So, the final result is simply zero. This way, the alternative expression (p)
+would never be evaluated.
 |#
