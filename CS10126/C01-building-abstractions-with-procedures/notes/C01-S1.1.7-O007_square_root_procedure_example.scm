@@ -7,7 +7,7 @@
 ;;; Location:      pp. 28-32
 ;;;
 ;;; I studied the distinction between ordinary mathematical functions and
-;;; computational procedures, and did a pratical experiment about resolving
+;;; computational procedures, and did a practical experiment about resolving
 ;;; square roots using Newton's method.
 ;;;
 ;;; SPDX-License-Identifier: AGPL-3.0-only
