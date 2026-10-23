@@ -1,5 +1,6 @@
-# Private directories
+# Private directories and files
 _*/
+exports/_*/
 
 # Git
 .git/
@@ -51,6 +52,7 @@ __pycache__/
 *.fdb_latexmk
 
 # Typst / LaTeX build output (keep only PDFs)
+.build/**
 build/**
 !build/**/
 !build/**/*.pdf
