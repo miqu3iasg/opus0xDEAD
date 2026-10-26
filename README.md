@@ -99,7 +99,7 @@ Study artifacts are kept separately from `meta.md` so that the metadata remains 
 
 ## Exports
 
-All PDFs live in a single `exports/` directory at the root of the repository, regardless of whether they came from Markdown (through Pandoc), LaTeX or Typst. Books do not have their own `exports/` folder. Inside `exports/`, each PDF sits at the same relative path as its source note, so `ALG4/C01-intro/notes/C01-S1.1-N001-basics.md` becomes `exports/ALG4/C01-intro/notes/C01-S1.1-N001-basics.pdf`. Mirroring the path is what keeps two books with identically named notes from overwriting each other, since filenames do not repeat the book identifier.
+All PDFs live in a single `exports/` directory at the root of the repository, regardless of whether they came from Markdown (through Pandoc), LaTeX or Typst. Books do not have their own `exports/` folder. Inside `exports/`, each PDF sits at the same relative path as its source note, so `ALG4/C01-intro/notes/S1.1-N001-basics.md` becomes `exports/ALG4/C01-intro/notes/S1.1-N001-basics.pdf`. Mirroring the path is what keeps two books, or two chapters, with identically named notes from overwriting each other, since filenames repeat neither the book nor the chapter identifier.
 
 Compilation byproducts, such as the auxiliary files, logs and SyncTeX data that LaTeX produces, go to a hidden `.build/` directory at the root, mirrored the same way. It is never versioned. Only the PDFs in `exports/` are committed, and the LaTeX source itself is not versioned, which keeps the repository focused on the finished, permanent artifact rather than the intermediate source used to produce it.
 
@@ -139,23 +139,24 @@ Within each book directory, material is organized by chapter, with separate subd
 
 There is no separate `code/` directory. Code files also serve as notes — they are written with explanatory comments — so they live in `notes/` alongside conceptual notes, distinguished by their content type (`PXXX`, see below). This applies to any area where code is part of the study, such as algorithms, numerical methods, simulations, or machine learning experiments.
 
-Since the book identifier is already given by the directory itself, it does not need to be repeated in filenames.
+Since the book and the chapter are already given by the directories themselves, neither needs to be repeated in filenames.
 
 ### File Naming
 
 Files follow the general format:
 
 ```text
-CXX-SX.X.X-TXXX-description.ext
+SX.X.X-TXXX-description.ext
 ```
 
 Where:
 
-- `CXX`: Chapter identifier.
 - `SX.X.X`: Section identifier, based on the source book.
 - `TXXX`: Content type and sequential number.
 - `description`: Short, descriptive name.
 - `ext`: File extension.
+
+Some languages do not accept dashes or dots in file names. In those cases, underscores replace them, and the description is written in camel case, for example: `S1_1_X024_EuclidsAlgorithm.java`.
 
 ### Content Types
 
@@ -169,10 +170,12 @@ The numbering of notes, programs, and exercises restarts within each section.
 Examples:
 
 ```text
-notes/C01-S1.1.1-N001-procedures.md
-notes/C01-S1.1.1-P001-square.scm
-exercises/C01-S1.1.2-X001-evaluate-expression.scm
-notes/C01-S00-N001-chapter-summary.md
+notes/S1.1.1-N001-procedures.md
+notes/S1.1.1-P001-square.scm
+exercises/S1.1.2-X001-evaluate-expression.scm
+exercises/S1_1_X024_EuclidsAlgorithm.java
+notes/S1_4_P012_integral_calculator.c
+notes/S00-N001-chapter-summary.md
 ```
 
 Any book-specific conventions (e.g. programming language used, exercise style) are documented in that book's own `meta.md`.

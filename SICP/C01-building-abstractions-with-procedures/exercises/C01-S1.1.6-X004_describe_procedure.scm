@@ -1,4 +1,4 @@
-;;; File:          C01-S1.1.6-E004_describe_procedure.scm
+;;; File:          C01-S1.1.6-X004_describe_procedure.scm
 ;;; Author:        Miquéias Medeiros <https://github.com/miqu3iasg>
 ;;; Created:       2026-10-01
 ;;; Modified:      2026-10-01
