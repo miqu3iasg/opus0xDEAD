@@ -45,8 +45,8 @@ By completing this book, I should be able to:
 ### Chapter 1 — Building Abstractions with Procedures
 
 - [x] 1.1 — The Elements of Programming
-- [ ] 1.2 — Procedures and the Processes They Generate
-- [ ] 1.3 — Formulating Abstractions with Higher-Order Procedures
+- [x] 1.2 — Procedures and the Processes They Generate
+- [x] 1.3 — Formulating Abstractions with Higher-Order Procedures
 
 ### Chapter 2 — Building Abstractions with Data
 

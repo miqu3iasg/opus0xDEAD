@@ -1,4 +1,4 @@
-;;; File:          C01-S1.1.7-P007_square_root_procedure_example.scm
+;;; File:          S1.1.7-P007_square_root_procedure_example.scm
 ;;; Author:        Miquéias Alves Medeiros <https://github.com/miqu3iasg>
 ;;; Created:       2026-10-19
 ;;; Modified:      2026-10-19

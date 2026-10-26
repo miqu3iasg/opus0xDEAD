@@ -1,4 +1,4 @@
-;;; File:          C01-S1.1.6-X003_square_largers.scm
+;;; File:          S1.1.6-X003_square_largers.scm
 ;;; Author:        Miquéias Medeiros <https://github.com/miqu3iasg>
 ;;; Created:       2026-09-30
 ;;; Modified:      2026-09-30

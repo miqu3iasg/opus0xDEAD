@@ -1,4 +1,4 @@
-; File:          C01-S1.1.3-P003_evaluating_combinations.scm
+; File:          S1.1.3-P003_evaluating_combinations.scm
 ; Author:        Miquéias Alves Medeiros <https://github.com/miqu3iasg>
 ; Created:       2026-09-20
 ; Modified:      2026-09-20
@@ -94,7 +94,7 @@
 ; 3. The names in the environment that carry values associated with
 ; computational objects (variables). We've seen the concepts of naming and
 ; enviroment previously in the file:
-; C01-building-abstractions-with-procedures/notes/C01-S1.1.2-P002_naming_and_enviroment.scm
+; C01-building-abstractions-with-procedures/notes/S1.1.2-P002_naming_and_enviroment.scm
 
 ; The secod rule is a special case of the third one, because the symbols
 ; (operators) are also included in the environment, and their respective

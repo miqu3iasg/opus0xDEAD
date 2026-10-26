@@ -1,4 +1,4 @@
-; File:          C01-S1.1.6-P006_conditionals_predicates.scm
+; File:          S1.1.6-P006_conditionals_predicates.scm
 ; Author:        Miquéias Alves Medeiros <https://github.com/miqu3iasg>
 ; Created:       2026-09-25
 ; Modified:      2026-09-25

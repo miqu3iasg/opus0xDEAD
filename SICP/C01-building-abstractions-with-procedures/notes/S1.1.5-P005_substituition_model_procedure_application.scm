@@ -1,4 +1,4 @@
-; File:          C01-S1.1.5-P005_substituition_model_procedure_application.scm
+; File:          S1.1.5-P005_substituition_model_procedure_application.scm
 ; Author:        Miquéias Alves Medeiros <https://github.com/miqu3iasg>
 ; Created:       2026-09-24
 ; Modified:      2026-09-24
@@ -19,7 +19,7 @@
 ; interpreter follows pratically the same steps used for combinations whose the operators
 ; name primitive procedures, which we saw in the section 1.1.3.
 ;
-; See: C01-S1.1.3-P003_evaluating_combinations.scm
+; See: S1.1.3-P003_evaluating_combinations.scm
 
 ; The mechanism for applying primite procedures is built into the interpreter.
 ; For compound procedures, the application process essentially follows these steps:
@@ -30,7 +30,7 @@
 ; To represent this, we will revisit the procedure defined in section 1.1.4 and
 ; evaluate the combination.
 ;
-; See: C01-S1.1.4-P004_compound_procedures.scm
+; See: S1.1.4-P004_compound_procedures.scm
 
 ; Produces the square of an integer
 (define (square x) (* x x ))

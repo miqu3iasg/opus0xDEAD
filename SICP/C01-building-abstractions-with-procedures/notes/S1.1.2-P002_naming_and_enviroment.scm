@@ -1,4 +1,4 @@
-; File:          C01-S1.1.2-P002_naming_and_enviroment.scm
+; File:          S1.1.2-P002_naming_and_enviroment.scm
 ; Author:        Miquéias Alves Medeiros <https://github.com/miqu3iasg>
 ; Created:       2026-09-17
 ; Modified:      2026-09-17
