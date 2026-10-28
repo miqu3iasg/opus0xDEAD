@@ -14,6 +14,20 @@
  * of N for which this program takes less 1 hour to compute the value of F(N)?
  * Develop a better implementation of F(N) that saves computed values in an array.
  *
+ * public class Fibonacci {
+ *     public static long F(int N) {
+ *         if (N == 0) return 0;
+ *         if (N == 1) return 1;
+ *         return F(N - 1) + F(N - 2);
+ *     }
+ *
+ *     public static void main(String[] args) {
+ *         for (int N = 0; N < 100; N++) {
+ *             StdOut.println(N + " " + F(N));
+ *         }
+ *     }
+ * }
+ *
  * References:
  *   - https://stackoverflow.com/questions/180158/how-do-i-time-a-methods-execution-in-java
  *   - https://www.geeksforgeeks.org/dsa/time-complexity-recursive-fibonacci-program/
@@ -24,16 +38,44 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  * Copyright:     (c) 2026 Miquéias Medeiros <https://github.com/miqu3iasg>.
  */
+import java.util.*;
 
 public class S1_1_X019_Fibonacci {
-    /*
-    We have a Fibonacci sequence here, where each number is derived from the sum of
-    the last two numbers, it grows exponentially O(2^n).
-    */
+    /**
+     * Computes the N-th number in the Fibonacci sequence using an array to store
+     * previously calculated values.
+     *
+     * @param N the index of the Fibonacci number to calculate, where F(0) = 0 and F(1) = 1
+     * @return the N-th Fibonacci number
+     */
     public static long F(int N) {
-        if (N == 0) return 0;
-        if (N == 1) return 1;
-        return F(N - 1) + F(N - 2);
+        /*
+         We have a Fibonacci sequence here, where each number is derived from the sum of
+         the last two numbers, it grows exponentially O(2^n).
+        */
+        long[] fib = new long[N + 1];
+
+        /*
+        The first number of a Fibonacci sequence is always zero. Because of that, I didn't any kind of
+        validation here.
+        */
+        fib[0] = 0;
+
+        if (N == 1) fib[1] = 1;
+
+        /*
+        I start with index two (i = 2) because the last two positions have had already occupied by the
+        first numbers of Fibonacci sequence.
+        */
+        for (int i = 2; i <= N; i++) {
+            /*
+            Here I abstract the Fibonacci algorithm itself, but using the array accessing specific
+            memory positions.
+            */
+            fib[i] = fib[i - 1] + fib[i + 2];
+        }
+
+        return fib[N];
     }
 
     public static void main(String[] args) {
@@ -60,6 +102,7 @@ public class S1_1_X019_Fibonacci {
         See: https://www.geeksforgeeks.org/dsa/time-complexity-recursive-fibonacci-program/
         */
 
+        /* NOTE: this code need to be commented so the maximum value of N can be calculated.*/
         for (int N = 0; N < 100; N++) {
             long start = System.nanoTime();
             System.out.println(N + " " + F(N)); // Process execution
