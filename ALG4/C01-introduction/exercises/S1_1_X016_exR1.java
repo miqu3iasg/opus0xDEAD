@@ -54,6 +54,7 @@ public class S1_1_X016_exR1 {
          */
         String s = exR2(n - 3) + n + exR2(n - 2) + n;
         if (n <= 0) return "";
+
         return s;
     }
 }
