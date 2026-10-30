@@ -8,7 +8,7 @@
  * Location:      p. 58
  *
  * Compilation:   $ javac S1_1_X024_EuclidsAlgorithm.java
- * Execution:     $ java S1_1_X024_EuclidsAlgorithm 105 24
+ * Execution:     $ java S1_1_X024_EuclidsAlgorithm <integer> <integer>
  *
  * 1.1.24 Give the sequence of values of p and q that are computed when Euclid’s
  * algorithm is used to compute the greatest common divisor of 105 and 24. Extend
